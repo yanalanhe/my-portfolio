@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                const headerOffset = 64;
+                const top = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
+                window.scrollTo({ top, behavior: 'smooth' });
             }
 
             // Close mobile menu after clicking a link
