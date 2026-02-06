@@ -1,5 +1,14 @@
-// Smooth scrolling for anchor links
+// Navigation and smooth scrolling
 document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('open');
+    });
+
     // Smooth scroll for all internal links
     const links = document.querySelectorAll('a[href^="#"]');
 
@@ -17,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     block: 'start'
                 });
             }
+
+            // Close mobile menu after clicking a link
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('open');
         });
     });
 
