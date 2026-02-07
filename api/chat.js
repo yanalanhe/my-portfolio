@@ -88,6 +88,6 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ message: reply });
   } catch (error) {
     console.error('OpenAI API error:', error.message);
-    return res.status(500).json({ error: 'Failed to get response from AI', detail: error.message });
+    return res.status(500).json({ error: 'Failed to get response from AI' });
   }
 };
