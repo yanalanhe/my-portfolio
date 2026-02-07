@@ -25,3 +25,5 @@ node_modules/
 # Build outputs (if you add a build process later)
 dist/
 build/
+
+.vercel

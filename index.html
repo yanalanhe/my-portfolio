@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chatbot.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -119,6 +120,30 @@
         </div>
     </footer>
 
+    <!-- Chatbot Widget -->
+    <button id="chatbot-toggle" class="chatbot-toggle" aria-label="Open chat">
+        <span class="chat-icon">&#128172;</span>
+        <span class="close-icon">&#10005;</span>
+    </button>
+
+    <div id="chatbot-panel" class="chatbot-panel">
+        <div class="chatbot-header">
+            <div class="chatbot-header-avatar">&#129302;</div>
+            <div class="chatbot-header-info">
+                <h3>Ask about Yan</h3>
+                <p>AI-powered assistant</p>
+            </div>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages">
+            <div class="chatbot-message bot">Hi! I can answer questions about Yan's skills, projects, and experience. What would you like to know?</div>
+        </div>
+        <form id="chatbot-input-form" class="chatbot-input-form">
+            <input id="chatbot-input" class="chatbot-input" type="text" placeholder="Ask me anything..." autocomplete="off">
+            <button id="chatbot-send" class="chatbot-send" type="submit">Send</button>
+        </form>
+    </div>
+
     <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
 </body>
 </html>
