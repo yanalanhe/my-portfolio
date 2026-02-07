@@ -1,5 +1,3 @@
-const OpenAI = require('openai');
-
 const SYSTEM_PROMPT = `You are an AI assistant embedded in Yan He's portfolio website. Your role is to help visitors learn about Yan's professional background, skills, and experience in AI engineering.
 
 ## About Yan He
@@ -57,29 +55,39 @@ module.exports = async function handler(req, res) {
   // Limit conversation history to prevent abuse
   const recentMessages = messages.slice(-10);
 
-  const openai = new OpenAI({ apiKey });
-
   try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...recentMessages,
-      ],
-      max_tokens: 300,
-      temperature: 0.7,
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...recentMessages,
+        ],
+        max_tokens: 300,
+        temperature: 0.7,
+      }),
     });
 
-    const reply = completion.choices[0].message.content;
+    if (!response.ok) {
+      if (response.status === 401) {
+        return res.status(500).json({ error: 'Invalid API key' });
+      }
+      if (response.status === 429) {
+        return res.status(429).json({ error: 'Rate limit exceeded. Please try again later.' });
+      }
+      return res.status(500).json({ error: 'Failed to get response from AI' });
+    }
+
+    const data = await response.json();
+    const reply = data.choices[0].message.content;
     return res.status(200).json({ message: reply });
   } catch (error) {
     console.error('OpenAI API error:', error.message);
-    if (error.status === 401) {
-      return res.status(500).json({ error: 'Invalid API key' });
-    }
-    if (error.status === 429) {
-      return res.status(429).json({ error: 'Rate limit exceeded. Please try again later.' });
-    }
-    return res.status(500).json({ error: 'Failed to get response from AI' });
+    return res.status(500).json({ error: 'Failed to get response from AI', detail: error.message });
   }
 };
