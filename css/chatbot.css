@@ -1,4 +1,16 @@
 /* ===================================
+   Voiceflow Widget – hidden by default, shown via "Try It"
+   =================================== */
+
+#voiceflow-chat {
+    display: none !important;
+}
+
+body.vf-chat-open #voiceflow-chat {
+    display: block !important;
+}
+
+/* ===================================
    Chatbot Widget
    =================================== */
 

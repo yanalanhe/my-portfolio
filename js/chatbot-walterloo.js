@@ -9,30 +9,35 @@
           url: "https://runtime-api.voiceflow.com"
         }
       });
-      // Hide the widget launcher so it only appears via "Try It" button
-      setTimeout(function() { window.voiceflow.chat.hide(); }, 1000);
     }
     v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
 })(document, 'script');
 
-// Opens the Voiceflow chat and hides the widget again when the user closes it
+// Listen for the Voiceflow widget's close event to hide the launcher
+window.addEventListener('message', function(event) {
+  try {
+    var data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+    if (data && data.type === 'voiceflow:close') {
+      var vf = window.voiceflow && window.voiceflow.chat;
+      if (vf) vf.hide();
+      document.body.classList.remove('vf-chat-open');
+      var el = document.getElementById('voiceflow-chat');
+      if (el) el.style.setProperty('display', 'none', 'important');
+    }
+  } catch (e) {
+    // ignore non-JSON messages
+  }
+});
+
+// Opens the Voiceflow chat when the user clicks "Try It"
 window.openVoiceflowChat = function() {
   var vf = window.voiceflow && window.voiceflow.chat;
   if (!vf) return;
+
+  var el = document.getElementById('voiceflow-chat');
+  if (el) el.style.removeProperty('display');
+
+  document.body.classList.add('vf-chat-open');
   vf.show();
   vf.open();
-
-  // Poll to detect when the chat dialog is closed, then hide the launcher
-  var opened = false;
-  var pollId = setInterval(function() {
-    var el = document.getElementById('voiceflow-chat');
-    if (!el) { clearInterval(pollId); return; }
-    var rect = el.getBoundingClientRect();
-    if (rect.height > 200) {
-      opened = true;
-    } else if (opened && rect.height < 100) {
-      vf.hide();
-      clearInterval(pollId);
-    }
-  }, 300);
 };
