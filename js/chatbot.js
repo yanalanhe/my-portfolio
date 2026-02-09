@@ -15,6 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
         return div.innerHTML;
     }
 
+    function formatBotMessage(text) {
+        return escapeHtml(text)
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/^(\d+)\.\s+/gm, '<li>$1. ')
+            .replace(/^[-•]\s+/gm, '<li>')
+            .replace(/\n/g, '<br>');
+    }
+
     function toggleChat() {
         isOpen = !isOpen;
         toggle.classList.toggle('active', isOpen);
@@ -27,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function addMessage(text, sender) {
         const msg = document.createElement('div');
         msg.className = 'chatbot-message ' + sender;
-        msg.innerHTML = escapeHtml(text);
+        msg.innerHTML = sender === 'bot' ? formatBotMessage(text) : escapeHtml(text);
         messagesContainer.appendChild(msg);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }

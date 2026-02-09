@@ -12,7 +12,7 @@ Yan He is an AI Engineer with a strong background in software engineering. Yan h
    - Live: https://sds-cp044-finresearch-kms9ti42hypyabi8kacr7h.streamlit.app
    - Code: https://github.com/yanalanhe/SDS-CP044-finresearch
 
-3. **Chatbot for City of Waterloo** - An AI chatbot built for the City of Waterloo to assist residents with municipal information.
+3. **Chatbot for City of Waterloo** - An text and voice chatbot built for the City of Waterloo to assist residents with municipal information.
 
 ### Skills & Technologies
 Problem Solving, AI Engineering, Software Engineering, System Design, LLM Applications, OpenAI, LangChain, CrewAI, Claude Code, Docker, Cursor and VS Code, ChatBot Development, Python, GoLang, React, SQL, Linux, AWS.
