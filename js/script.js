@@ -55,4 +55,41 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+
+    // Image modal functionality
+    const imageModal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCloseBtn = document.querySelector('.image-modal-close');
+    const screenshotButtons = document.querySelectorAll('.project-screenshot-btn');
+
+    screenshotButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const imageSrc = this.getAttribute('data-image');
+            const imageAlt = this.getAttribute('data-alt');
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            imageModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    modalCloseBtn.addEventListener('click', function() {
+        imageModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    imageModal.addEventListener('click', function(e) {
+        if (e.target === imageModal) {
+            imageModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && imageModal.classList.contains('active')) {
+            imageModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
 });
