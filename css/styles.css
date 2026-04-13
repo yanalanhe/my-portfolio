@@ -60,7 +60,7 @@ body {
 }
 
 section {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-md) 0;
 }
 
 h1, h2, h3 {
@@ -216,7 +216,7 @@ img {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: var(--spacing-xl);
+    gap: var(--spacing-xs);
 }
 
 .project-card {
@@ -299,12 +299,12 @@ img {
 }
 
 .project-content {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
 }
 
 .project-title {
     font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     color: var(--text-dark);
     white-space: nowrap;
     text-align: center;
@@ -320,13 +320,13 @@ img {
     text-align: center;
     color: var(--text-light);
     font-size: 0.9rem;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
 }
 
 .project-links {
     display: flex;
     justify-content: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
 }
 
 .project-link {
@@ -346,7 +346,7 @@ img {
 
 .project-screenshot-btn {
     display: block;
-    margin: var(--spacing-md) auto 0;
+    margin: var(--spacing-xs) auto 0;
     padding: var(--spacing-xs) var(--spacing-md);
     background-color: var(--primary-color);
     color: var(--bg-white);
@@ -402,7 +402,7 @@ img {
     font-size: var(--font-size-lg);
     color: var(--text-light);
     margin-bottom: var(--spacing-lg);
-    max-width: 600px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
